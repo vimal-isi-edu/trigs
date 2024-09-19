@@ -1,0 +1,15 @@
+# If you install the first set of packages, the second set will be installed as they are dependencies for some of packahges in the first set
+# First Set
+torch~=2.4.1
+torchvision~=0.19.1
+wandb~=0.18.1
+lightning~=2.4.0
+matplotlib~=3.9.2
+pandas~=2.2.2
+scikit-learn~=1.5.2
+# Second SEt
+pillow~=10.4.0
+numpy~=2.1.1
+tqdm~=4.66.5
+torchmetrics~=1.4.2
+joblib~=1.4.2
