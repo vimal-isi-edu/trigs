@@ -1,5 +1,7 @@
 # TRIGS: Trojan Identification from Gradient-based Signatures
-This repository includes the official implementation for the paper "TRIGS: Trojan Identification from Gradient-based Signatures", accepted for ICPR 2024. It is based on PyTorch.
+This repository includes the official implementation for the following paper. The implementation is based on PyTorch.
+
+Mohamed E. Hussein, Sudharshan Subramaniam Janakiraman, and Wael AbdAlmageed, "TRIGS: Trojan Identification from Gradient-based Signatures", accepted for ICPR 2024.
 
 ## Step 1: Prepare the datasets
 
@@ -11,7 +13,7 @@ Download the trained models for CIFAR10 and Tiny ImageNet from the following lin
 Unzip model files, which are named `clean_models_trainval.zip`, `poisoned_models_trainval.zip`, `clean_models_test.zip`, and `poisoned_models_test.zip`, for the CIFAR10 dataset, in a separate directory for each dataset. Note that for the Tiny ImageNet dataset, the `train` and `test` files for the poisoned models end with `Triggers_01_10` and `Triggers_11_20`, respectively, instead.
 
 ### The TAT dataset for ImageNet
-Download the TAT dataset from [this link](https://drive.google.com/drive/u/1/folders/14xaroC7RayfRxhPiM4uhdGqN5c04GFR7). Then, decompress all the `.tar.gz` files under the underlying four directories.
+Download the TAT dataset from [this repository](https://github.com/vimal-isi-edu/tat). Then, decompress all the `.tar.gz` files under the underlying four directories.
 
 ## Step 2: Set up the environment
 This implementation was tested on an `Ubuntu 22.04` system with `Python 3.11.9` and the following packages, which you can also find in the included `requirements.txt` file.
@@ -32,10 +34,10 @@ To create the signature for a probe model, use the script `trigs/generate_model_
 python trigs/generate_model_signature.py \
   --dataset_name ImageNet \
   --model_name vitb16 \
-  --weights_path <root directory of your data>/TAT/poisoned_models_trainval/vitb16_p0.010_499/last.pt \
+  --weights_path PATH_TO_PYTORCH_MODEL_FILE \
   --iterations 200 \
   --learning_rate 0.1 \
-  --output_dir <your_output_directory> \
+  --output_dir OUTPUT_DIRECTORY \
   --opt_type ADAM \
   --lambda_tv 1e-3 \
   --batch_size 250
@@ -76,8 +78,8 @@ To create the statistics signatures from the raw image signatures, use the scrip
 
 ```bash
 python scripts/create_signature_stats_images.py \
-  --sig_path <root directory of model signatures> \
-  --num_jobs <number of jobs to use>
+  --sig_path MODEL_SIGNATURE_DIRECTORY \
+  --num_jobs NUMBER_OF_JOBS
 ```
 
 The script above will create the following `numpy` files under each model signature directory in the dataset. The `numpy` files correspond to basic statistics (min, max, mean, and std), quantiles of different numbers (3 or 7), and histograms of different numbers of bins (4, 8, 12, or 16).
@@ -98,8 +100,8 @@ python trigs/signature_classifier.py \
   --dataset_name ImageNet \
   --model_name Baseline \
   --epochs 200 \
-  --ckpt_path <your output directory> \
-  --data_path <your signatures directory> \
+  --ckpt_path OUTPUT_DIRECTORY \
+  --data_path SIGNATURES_DIRECTORY \
   --opt_mode min \
   --split_rand_seed 10 \
   --train_ds_use_frac 1.0
