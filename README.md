@@ -1,5 +1,5 @@
 # TRIGS: Trojan Identification from Gradient-based Signatures
-This repository includes the official implementation for the following paper. The implementation is based on PyTorch.
+This repository includes the official PyTorch implementation for the following paper. An earlier version of the paper can be found on [arxiv](https://arxiv.org/pdf/2306.04877).
 
 Mohamed E. Hussein, Sudharshan Subramaniam Janakiraman, and Wael AbdAlmageed, "TRIGS: Trojan Identification from Gradient-based Signatures", accepted for ICPR 2024.
 
